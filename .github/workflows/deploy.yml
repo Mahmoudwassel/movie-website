@@ -28,7 +28,14 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          if [ -z "$VITE_TMDB_TOKEN" ]; then
+            echo "TMDB token is missing"
+            exit 1
+          else
+            echo "TMDB token is available"
+          fi
+          npm run build
         env:
           VITE_TMDB_TOKEN: ${{ secrets.VITE_TMDB_TOKEN }}
 
