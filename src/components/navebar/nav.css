@@ -1,0 +1,19 @@
+.fav{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    row-gap: 10px;
+
+}
+.fav-num{
+    position: static;
+    color: wheat;
+    font-size: 12px;
+    background-color: black;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -11,8 +11,10 @@ export default function hero(){
                         <span>Sci-Fi</span>
                     </div>
                     <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival. </p>
-                    <button className="btn btn-primary"> Watch Now </button>
-                    <button className="btn btn-outline-light ms-2"> + Favorites </button>
+                    <div>
+                        <button className="btn btn-primary"> Watch Now </button>
+                        <button className="btn btn-outline-light ms-2"> + Favorites </button>
+                    </div>
                 </div>
             </div>
 

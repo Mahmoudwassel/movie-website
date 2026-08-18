@@ -1,0 +1,6 @@
+.home-movies{
+    padding-top: 30px;
+    background:linear-gradient(to bottom , wheat ,blue);
+    background-position: center;
+    background-attachment: fixed;
+}
