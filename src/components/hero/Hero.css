@@ -1,7 +1,7 @@
 .hero{
     display: flex;
     align-items: center;
-    background-image: url("images/heroback.jpg");
+    background-image: url("/movie-website/images/heroback.jpg");
     background-size: cover;
     background-position: center;
     min-height: 500px;
