@@ -5,45 +5,50 @@ import Navbar from "../navebar/Navbar"
 export default function MovieDetails(){
     const[movie,setMovie]=useState(null)
     const [videos, setVideos] = useState([]);
-
+    const [loading, setLoading] = useState(true);
     const{id}=useParams();
+
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, {
-            headers: {
-                Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
-                accept: "application/json"
-            }
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setVideos(data.results);
+        Promise.all([
+            fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, {
+                headers: {
+                    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+                    accept: "application/json"
+                }
+                })
+                .then((res) => res.json()),
+            fetch(`https://api.themoviedb.org/3/movie/${id}` ,
+                {
+                    headers:{Authorization:`Bearer ${import.meta.env.VITE_TMDB_TOKEN}`, accept:"application/json" }
+                })
+                .then((res)=>res.json())
+            ])
+            .then(([videoData,movieData])=>{
+                    setMovie(movieData);
+                    setVideos(videoData.results);
             })
             .catch((error) => {
                 console.log("VIDEO ERROR:", error);
-            });
-    }, [id]);
+            })
+            .finally(()=>{
+                setLoading(false);
+            })
+        }, [id]);
 
-
-    useEffect(()=>{
-        fetch(`https://api.themoviedb.org/3/movie/${id}` ,
-            {
-                headers:{Authorization:`Bearer ${import.meta.env.VITE_TMDB_TOKEN}`, accept:"application/json" }
-            })
-            .then((res)=>res.json())
-            .then((data)=>{
-                setMovie(data);
-            })
-            .catch((error)=>{
-                console.log(error);
-            })
-    },[id])
     const hours = movie ? Math.floor(movie.runtime/60):0;
     const minutes = movie? movie.runtime % 60:0
     const trailer = videos.find((video) => video.site === "YouTube" && video.type === "Trailer");
     return(
         <>
         <Navbar/>
-                {movie &&       
+        {
+            loading ? (    
+                <div className="d-flex justify-content-center align-items-center vh-100">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div> )
+            : movie &&       
                 <div className=" main-details py-5"  style={{backgroundImage:`url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`}}>
                     <div className="movie-details" style={{}}>
                         <div className="movie-card row  align-items-center  ">
@@ -76,9 +81,7 @@ export default function MovieDetails(){
                         </div>
                     </div>
             </div>
-
-                    }
-
+            }
         </>
     )
 }

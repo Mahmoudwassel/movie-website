@@ -27,11 +27,9 @@ export default function Home(){
 
     useEffect(() => {
         const controller = new AbortController();
-        
         const url = debouncedSearch
         ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(debouncedSearch)}&page=${page}`
         : `https://api.themoviedb.org/3/movie/popular?page=${page}`;
-        setError("");
         setLoading(true);
         fetch(url, {
             headers: {

@@ -29,3 +29,7 @@
     gap: 15px;
     flex-wrap: wrap;
 }
+.bottoms{
+    display: flex;
+    justify-content: space-around;
+}

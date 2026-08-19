@@ -2,6 +2,7 @@ import "./MovieCard.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {addtofavoit} from "../../app/action"
+import  Button  from "react-bootstrap/Button";
 
 
 
@@ -21,8 +22,10 @@ function MovieCard({movie}) {
                     <span>{movie.release_date}</span>
                 </div>
                 <p>{movie.overview}</p>
-                <Link to={`/movie/${movie.id}`} className="btn btn-primary">Details</Link>
-                <button className="btn"onClick={handleAddToFavorite}>❤️ Favorite</button>
+                <div className="bottoms">
+                    <Link to={`/movie/${movie.id}`} className="btn btn-primary">Details</Link>
+                    <Button  variant="outline-primary" onClick={handleAddToFavorite}>❤️ Favorite</Button>
+                </div>
             </div>
         </div>
         

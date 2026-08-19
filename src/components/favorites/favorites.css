@@ -1,5 +1,40 @@
 .favor-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background:linear-gradient(to bottom , gray , white);
     background-attachment: fixed;
+    min-height: 90vh;
     margin-top: 50px;
+}
+.fav-titel{
+    width: 400px;
+    border-radius: 10px;
+    color: white;
+    background:black;
+    overflow: hidden;
+    border: 1px solid black;
+    position: relative;
+    z-index: 1;
+}
+.fav-titel::before{
+    rotate: 30deg;
+    content:"";
+    position: absolute;
+    width: 50%;
+    height: 350%;
+    background: linear-gradient(to left , transparent 40% , white 50% , transparent 60% );
+    top: -40px;
+    right:-100px;
+    animation:  movie 5s ease-in infinite;
+    z-index: -1;
+}
+@keyframes movie {
+    from{
+        left:350px
+    }
+    to{
+        
+        left:-150px
+    }
 }
